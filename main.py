@@ -1,48 +1,51 @@
-moves = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}
+moves = {1: " ", 2: " ", 3: " ", 4: " ", 5: " ", 6: " ", 7: " ", 8: " ", 9: " "}
+
+def print_board():
+    print(" {n1} | {n2} | {n3} \n___|___|___\n {n4} | {n5} | {n6} \n___|___|___\n {n7} | {n8} | {n9} \n   |   |   ".
+          format(n1=moves[1], n2=moves[2], n3=moves[3], n4=moves[4], n5=moves[5],
+                 n6=moves[6], n7=moves[7], n8=moves[8], n9=moves[9]))
 
 
-def print_board(moves):
-    for i in moves:
-        if i == 1:
-            print(" {value} |".format(value=i))
-        if i == 2:
-            print(" {value} ".format(value=i))
-    print("_" * 3 + "|" + "_" * 3 + "|" + "_" * 3)
-    print("_" * 3 + "|" + "_" * 3 + "|" + "_" * 3)
-    print(" " * 3 + "|" + " " * 3 + "|" + " " * 3)
-
-
-def wait_for_next_move(move, turn):
-    while not 0 < move < 10 and not move.isdigit():
-        move = input("Invalid input. Try something between 1 and 9! Type in your next move position in the board!")
+def wait_for_next_move(turn):
+    move = int(input("{turn} Player, please type in your next move position in the board: ".format(turn=turn)))
+    while not 0 < move < 10 and not move.isdigit() and moves[move] != " ":
+        move = input("Invalid input! Please try typing in something else: ")
     else:
-        if turn == "first":
+        if turn == "First":
             moves[move] = "X"
-            turn = "second"
+            turn = "Second"
         else:
             moves[move] = "Y"
-            turn = "first"
+            turn = "First"
+        print_board()
 
 
-def winner(move):
-    # TODO check if all values are X or Y (tie!)
-    # for(v in moves.values()):
-    #	if v != "X" and v != "Y"
-    print(move)
-    if (moves[1] == moves[2] == moves[3] == move
-        or moves[4] == moves[5] == moves[6] == move
-        or moves[7] == moves[8] == moves[9] == move
-        or moves[1] == moves[4] == moves[7] == move
-        or moves[2] == moves[5] == moves[8] == move
-        or moves[3] == moves[6] == moves[9] == move
-        or moves[5] == moves[1] == moves[9] == move
-        or moves[3] == moves[5] == moves[7] == move):
-        return move
-    return None
+def is_there_a_winner():
+    for v in moves.values():
+        if v is " ":
+            break
+    else:
+        return False # Tie! There is no winner.
+    if (moves[1] == moves[2] == moves[3]
+        or moves[4] == moves[5] == moves[6]
+        or moves[7] == moves[8] == moves[9]
+        or moves[1] == moves[4] == moves[7]
+        or moves[2] == moves[5] == moves[8]
+        or moves[3] == moves[6] == moves[9]
+        or moves[5] == moves[1] == moves[9]
+        or moves[3] == moves[5] == moves[7]):
+        return True # We have a winner!
+    return None # No one won yet.
 
 
-print_board(moves)
-turn = "first"
-move = int(input("Type in your next move position in the board!"))
-while winner(move) is None:
-    wait_for_next_move(move, turn)
+print_board()
+turn = "First"
+wait_for_next_move(turn)
+while is_there_a_winner() is None:
+    wait_for_next_move(turn)
+else:
+    if is_there_a_winner is True:
+        print("The {turn} Player won the game!".format(turn=turn))
+    else:
+        print("There was a tie!")
+ 
