@@ -24,7 +24,7 @@ def wait_for_next_move():
         move = int(move)
         if not 0 < move < 10 or moves.get(move, None) is not " ":
             move = input(
-                "Invalid input! Please try typing in something else: ")
+                "Invalid input! Please try typing in another number: ")
             continue
         break
 
