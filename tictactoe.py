@@ -59,9 +59,13 @@ def print_scores(quit=None):
     if quit == "quit":
         print("THE FINAL RESULT IS: ")
     print("________SCORE_________\n"
-          "|Player 1: {player1} victories| \n"
-          "|Player 2: {player2} victories| \n"
-          "______________________".format(player1=player1, player2=player2))
+          "|Player 1: {player1} victor{plural1}| \n"
+          "|Player 2: {player2} victor{plural2}| \n"
+          "______________________".format(player1=player1, player2=player2,
+                                          plural1="y  " if player1 == 1
+                                          else "ies",
+                                          plural2="y  " if player2 == 1
+                                          else "ies"))
 
 
 def start_game():
