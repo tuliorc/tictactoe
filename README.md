@@ -3,6 +3,8 @@
 This repository contains a Python tic-tac-toe game that can be played via 
 console/terminal. 
 
+![Screenshot](tictactoe-demo.png)
+
 #### How to play
 
 Clone the remote repository:
@@ -17,7 +19,7 @@ Go into your new local repository:
 
 Make sure you have Python3 installed in your computer:
 
-`python3`
+`python -V`
 
 In case you don't, install it:
 
