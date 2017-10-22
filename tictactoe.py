@@ -12,7 +12,7 @@ def print_board():
                                                      n9=moves[9]))
 
 
-def wait_for_next_move():
+def update_with_next_move():
     global turn
     move = input(
         "{turn} Player, please type in your next move position in the board: ".
@@ -36,14 +36,15 @@ def wait_for_next_move():
         turn = "First"
     print_board()
 
-
 def is_there_a_winner():
-    if moves[1] == moves[2] == moves[3] != " " or moves[4] == moves[5] == \
-       moves[6] != " " or moves[7] == moves[8] == moves[9] != " " or \
-       moves[1] == moves[4] == moves[7] != " " or moves[2] == moves[5] == \
-       moves[8] != " " or moves[3] == moves[6] == moves[9] != " " or \
-       moves[1] == moves[5] == moves[9] != " " or moves[3] == moves[5] == \
-       moves[7] != " ":
+    if moves[1] == moves[2] == moves[3] != " " or \
+       moves[4] == moves[5] == moves[6] != " " or \
+       moves[7] == moves[8] == moves[9] != " " or \
+       moves[1] == moves[4] == moves[7] != " " or \
+       moves[2] == moves[5] == moves[8] != " " or \
+       moves[3] == moves[6] == moves[9] != " " or \
+       moves[1] == moves[5] == moves[9] != " " or \
+       moves[3] == moves[5] == moves[7] != " ":
         return True  # We have a winner!
 
     for v in moves.values():
@@ -72,11 +73,12 @@ def start_game():
     global moves, player1, player2, turn
     for key in moves.keys():
         moves[key] = " "
-    turn = "First"
     print_board()
-    wait_for_next_move()
+    turn = "First"
+    update_with_next_move()
+
     while is_there_a_winner() is None:
-        wait_for_next_move()
+        update_with_next_move()
     else:
         if is_there_a_winner() is True:
             if turn == "Second":
